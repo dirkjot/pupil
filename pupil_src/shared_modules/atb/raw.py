@@ -18,21 +18,31 @@ os_name = platform.system()
 del platform
 if os_name == "Linux":
     import OpenGL.GL
+elif os_name == 'Windows':
+    import struct
+    bits = struct.calcsize("P")*8
+    #if bits==64:
+    #    print 'Found Win64 environment'
 
+## TODO : Address pyinstaller packaging for win platform
+# if getattr(sys, 'frozen', False):
+#     # we are running in a |PyInstaller| bundle using the local version
+#     if os_name == "Linux":
+#         filename = 'libAntTweakBar.so'
+#     elif os_name == 'Darwin':
+#         filename = 'libAntTweakBar.dylib'
+#     else:
+#         filename = 'libAntTweakBar.dll'
+#     dll_path = os.path.join(sys._MEIPASS,filename)
+#
+# else:
+#     # we are running in a normal Python environment
+#     dll_path = ctypes.util.find_library('AntTweakBar')
 
-if getattr(sys, 'frozen', False):
-    # we are running in a |PyInstaller| bundle using the local version
-    if os_name == "Linux":
-        filename = 'libAntTweakBar.so'
-    elif os_name == 'Darwin':
-        filename = 'libAntTweakBar.dylib'
-    else:
-        filename = 'libAntTweakBar.dll'
-    dll_path = os.path.join(sys._MEIPASS,filename)
-
-else:
-    # we are running in a normal Python environment
-    dll_path = ctypes.util.find_library('AntTweakBar')
+import os
+external_lib_path = os.path.join(os.path.dirname(os.path.abspath(os.path.curdir)), 'shared_modules', 'external', 'AntTweakBar64')
+print 'ATB lib:', external_lib_path
+dll_path = ctypes.util.find_library(external_lib_path)
 
 if not dll_path:
     raise RuntimeError, 'AntTweakBar library not found'
