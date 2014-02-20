@@ -149,14 +149,23 @@ def main():
     s1_pool = buildSharedPool(user_dir_s1, rec_dir_s1, 'Subject 1')
     s2_pool = buildSharedPool(user_dir_s2, rec_dir_s2, 'Subject 2')
 
+    # configure window locations
+    s1_layout_eye = (eye_size[0], eye_size[1], 70, 30)
+    s2_layout_eye = (eye_size[0], eye_size[1], 90 + eye_size[0], 30)
+
+    s1_layout_world = (world_size[0]/2, world_size[1]/2, 70 , 80 + eye_size[1])
+    s2_layout_world = (world_size[0]/2, world_size[1]/2, 90 + eye_size[0], 80 + eye_size[1])
+
+
+
     # set up subprocesses
 
     # this works fine on win7
-    p1_eye = Process(target=eye, args=(s1_pool, s1_eye_src,eye_size))
-    p1_world = Process(target=world, args=(s1_pool, s1_world_src, world_size))
+    p1_eye = Process(target=eye, args=(s1_pool, s1_eye_src, eye_size, s1_layout_eye))
+    p1_world = Process(target=world, args=(s1_pool, s1_world_src, world_size, s1_layout_world))
 
-    p2_eye = Process(target=eye, args=(s2_pool, s2_eye_src,eye_size))
-    p2_world = Process(target=world, args=(s2_pool, s2_world_src, world_size))
+    p2_eye = Process(target=eye, args=(s2_pool, s2_eye_src,eye_size, s2_layout_eye))
+    p2_world = Process(target=world, args=(s2_pool, s2_world_src, world_size,s2_layout_world ))
 
 
     sleep(0.5)

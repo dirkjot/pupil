@@ -23,7 +23,7 @@ from uvc_capture import autoCreateCapture
 from calibrate import get_map_from_cloud
 from pupil_detectors import Canny_Detector,MSER_Detector,Blob_Detector
 
-def eye(g_pool,cap_src,cap_size):
+def eye(g_pool,cap_src,cap_size, layout):
     """
     Creates a window, gl context.
     Grabs images from a capture.
@@ -177,7 +177,7 @@ def eye(g_pool,cap_src,cap_size):
 
 
     glfwInit()
-    window = glfwCreateWindow(width, height, "Eye", None, None)
+    window = glfwCreateWindow(width, height, g_pool.app + ' Eye Camera', None, None)
     glfwMakeContextCurrent(window)
 
     # Register callbacks window
@@ -189,8 +189,8 @@ def eye(g_pool,cap_src,cap_size):
     glfwSetCursorPosCallback(window,on_pos)
     glfwSetScrollCallback(window,on_scroll)
 
-    glfwSetWindowPos(window,800,0)
-    on_resize(window,width,height)
+    glfwSetWindowPos(window,layout[2],layout[3])
+    on_resize(window,layout[0], layout[1])
 
     # gl_state settings
     basic_gl_setup()

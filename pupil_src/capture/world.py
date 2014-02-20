@@ -46,7 +46,7 @@ from marker_detector import Marker_Detector
 logger = logging.getLogger(__name__)
 
 
-def world(g_pool,cap_src,cap_size):
+def world(g_pool,cap_src,cap_size, layout):
     """world
     Creates a window, gl context.
     Grabs images from a capture.
@@ -113,6 +113,7 @@ def world(g_pool,cap_src,cap_size):
         logger.error("Could not retrieve image from capture")
         cap.close()
         return
+
     height,width = frame.img.shape[:2]
 
 
@@ -123,12 +124,21 @@ def world(g_pool,cap_src,cap_size):
         if dt:
             bar.fps.value += .05 * (1. / dt - bar.fps.value)
 
+    # def set_window_size(mode,data):
+    #     height,width = frame.img.shape[:2]
+    #     ratio = (1,.75,.5,.25)[mode]
+    #     w,h = int(width*ratio),int(height*ratio)
+    #     glfwSetWindowSize(world_window,w,h)
+    #     data.value=mode # update the bar.value
+
     def set_window_size(mode,data):
-        height,width = frame.img.shape[:2]
+        # height,width = frame.img.shape[:2]
+        height, width = layout[1], layout[0]
         ratio = (1,.75,.5,.25)[mode]
         w,h = int(width*ratio),int(height*ratio)
         glfwSetWindowSize(world_window,w,h)
         data.value=mode # update the bar.value
+
 
     def get_from_data(data):
         """
@@ -204,7 +214,7 @@ def world(g_pool,cap_src,cap_size):
     bar.timestamp = time()
     bar.calibration_type = c_int(load("calibration_type",0))
     bar.record_eye = c_bool(load("record_eye",0))
-    bar.window_size = c_int(load("window_size",0))
+    bar.window_size = c_int(load("window_size",1))
     window_size_enum = atb.enum("Display Size",{"Full":0, "Medium":1,"Half":2,"Mini":3})
     calibrate_type_enum = atb.enum("Calibration Method",calibration_routines.index_by_name)
     bar.rec_name = create_string_buffer(512)
@@ -228,7 +238,7 @@ def world(g_pool,cap_src,cap_size):
 
     # Initialize glfw
     glfwInit()
-    world_window = glfwCreateWindow(width, height, "World", None, None)
+    world_window = glfwCreateWindow(layout[0], layout[1], g_pool.app + ' World View', None, None)
     glfwMakeContextCurrent(world_window)
 
     # Register callbacks world_window
@@ -243,7 +253,7 @@ def world(g_pool,cap_src,cap_size):
     #set the last saved window size
     set_window_size(bar.window_size.value,bar.window_size)
     on_resize(world_window, *glfwGetFramebufferSize(world_window))
-    glfwSetWindowPos(world_window,0,0)
+    glfwSetWindowPos(world_window,layout[2],layout[3])
 
     # gl_state settings
     basic_gl_setup()

@@ -125,10 +125,13 @@ def main():
     g_pool.app = 'capture'
     # set up subprocesses
 
-    p_eye = Process(target=eye, args=(g_pool,eye_src,eye_size))
+
+    layout_eye = (eye_size[0], eye_size[1], 70, 30)
+    p_eye = Process(target=eye, args=(g_pool,eye_src,eye_size, layout_eye))
 
     # this works fine on win7
-    p_world = Process(target=world, args=(g_pool, world_src, world_size))
+    layout_world = (world_size[0], world_size[1], 70 + eye_size[0]/2, 30 + eye_size[1]/2)
+    p_world = Process(target=world, args=(g_pool, world_src, world_size,layout_world))
 
     sleep(0.5)
 
