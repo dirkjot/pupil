@@ -97,8 +97,8 @@ def main():
     world_src = ["Logitech Camera","(046d:081d)","C510","B525", "C525","C615","C920","C930e"]
 
     # to assign cameras directly, using integers as demonstrated below
-    # eye_src = 1
-    # world_src = 0
+    eye_src = 1
+    world_src = 2
 
     # to use a pre-recorded video.
     # Use a string to specify the path to your video file as demonstrated below
@@ -124,18 +124,29 @@ def main():
     g_pool.version = version
     g_pool.app = 'capture'
     # set up subprocesses
+
     p_eye = Process(target=eye, args=(g_pool,eye_src,eye_size))
 
-    # Spawn subprocess:
-    p_eye.start()
-    if platform.system() == 'Linux':
-        # We need to give the camera driver some time before requesting another camera.
-        sleep(0.5)
+    # this works fine on win7
+    p_world = Process(target=world, args=(g_pool, world_src, world_size))
 
-    world(g_pool,world_src,world_size)
+    sleep(0.5)
+
+    p_eye.start()
+    p_world.start()
+
+    # Spawn subprocess:
+    # p_eye.start()
+    # if platform.system() == 'Linux':
+    #     # We need to give the camera driver some time before requesting another camera.
+    #     sleep(0.5)
+
+    #world(g_pool,world_src,world_size)
 
     # Exit / clean-up
+
     p_eye.join()
+    p_world.join()
 
 if __name__ == '__main__':
     freeze_support()
