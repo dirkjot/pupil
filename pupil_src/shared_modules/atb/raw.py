@@ -41,7 +41,7 @@ elif os_name == 'Windows':
 
 import os
 external_lib_path = os.path.join(os.path.dirname(os.path.abspath(os.path.curdir)), 'shared_modules', 'external', 'AntTweakBar64')
-print 'ATB lib:', external_lib_path
+#print 'ATB lib:', external_lib_path
 dll_path = ctypes.util.find_library(external_lib_path)
 
 if not dll_path:

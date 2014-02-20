@@ -65,7 +65,7 @@ del platform
 
 import os
 external_lib_path = os.path.join(os.path.dirname(os.path.abspath(os.path.curdir)), 'shared_modules', 'external', 'glfw3')
-print 'GLFW lib:', external_lib_path
+#print 'GLFW lib:', external_lib_path
 dll_path = ctypes.util.find_library(external_lib_path)
 
 _glfw = ctypes.CDLL(dll_path)
