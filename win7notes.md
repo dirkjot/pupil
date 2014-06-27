@@ -22,11 +22,11 @@ for that, you can use MiniConda instead:
 
 #### Prebuilt Win7 Python packages
 
-[PyOpenGL‑3.0.2.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopengl)
+[PyOpenGL‑3.1.0.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopengl)
 
-[PyAudio‑0.2.7.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
+[PyAudio‑0.2.8.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
 
-[opencv‑python‑2.4.8.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv)
+[opencv‑python-2.4.9.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv)
 
 
 #### Install FFMPEG
