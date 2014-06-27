@@ -10,6 +10,16 @@ Rich Stoner, Feb 20, 2014
 
 Provides the python intepreter and some key packages like numpy, scipy, etc.
 
+#### (alternative) MiniConda Python distribution
+
+Anaconda is a very large distribution with over 200 packages of statistical software preinstalled. If you have no need 
+for that, you can use MiniConda instead:
+* Download miniconda from the [pydata.org](http://conda.pydata.org/miniconda.html) site (affiliated with Continuum), choose the python 2.7 , 64 bit , installer
+* I suggest installing it in `c:\Anaconda` instead of `c:\Miniconda` as the installer suggests, but it does not really matter.
+* In a CMD prompt, type `python` and check that you get a running python 2.7 interpreter. The first line of the welcome messsage  should include the name "Continuum Analytics".  If not, you are accessing another python on your system.  
+* If the previous step did not work, add `c:\Anaconda` and `c:\Anaconda\Scripts` to your path.
+* In the CMD prompt, run the `conda install X` command four times, using the following package names for X: `numpy`, `scipy`, `zeromq`, `pyzmq`. 
+
 #### Prebuilt Win7 Python packages
 
 [PyOpenGL‑3.0.2.win‑amd64‑py2.7.exe](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopengl)
